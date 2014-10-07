@@ -4,6 +4,10 @@
 
 In partnership with [Firebase](https://www.firebase.com), we're making the public Hacker News data available in near real time. Firebase enables easy access from [Android](https://www.firebase.com/docs/android/), [iOS](https://www.firebase.com/docs/ios/) and the [web](https://www.firebase.com/docs/web/). Servers aren't left out; there's also [REST](https://www.firebase.com/docs/rest/) support.
 
+If you can use one of the many [Firebase client libraries](https://www.firebase.com/docs/) you really should. The libraries handle networking efficiently and can raise events when things change. Be sure to check them out.
+
+Please email api@ycombinator.com if you find any bugs.
+
 ## URI and Versioning
 
 The API is based at https://hacker-news.firebaseio.com.
@@ -12,7 +16,7 @@ We hope to improve it over time, and may later enable access to private per-user
 
 ## Items
 
-Stories, comments, Ask HNs and even polls are just items. They're identified by their ids, which are unique integers, and live under https://hacker-news.firebaseio.com/v0/item/<id>.
+Stories, comments, jobs, Ask HNs and even polls are just items. They're identified by their ids, which are unique integers, and live under https://hacker-news.firebaseio.com/v0/item/<id>.
 
 All items have a subset of the following properties:
 
@@ -20,7 +24,7 @@ Field | Description
 ------|------------
 id | The item's unique id. Required.
 deleted | `true` if the item is deleted.
-type | The type of item. One of "story", "comment", "poll", or "pollopt".
+type | The type of item. One of "job", "story", "comment", "poll", or "pollopt".
 by | The username of the item's author.
 time | Creation date of the item, in [Unix Time](http://en.wikipedia.org/wiki/Unix_time).
 text | The comment, Ask HN, or poll text. HTML.
@@ -117,7 +121,11 @@ For example: https://hacker-news.firebaseio.com/v0/user/jl.json?print=pretty
 }
 ```
 
-## Top Stories
+## Live Data
+
+The coolest part of Firebase is its support for change notifications. While you can subscribe to individual items and profiles, you'll need to use the following to observe front page ranking, new items, and new profiles.
+
+### Top Stories
 
 The current top 100 stories are at https://hacker-news.firebaseio.com/v0/topstories.
 
@@ -126,3 +134,28 @@ Example: https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty
 ```json
 [ 8414149, 8414078, 8413972, 8411638, 8414102, 8413204, 8413100, 8413971, 8412744, 8414003, 8412841, 8412802, 8412605, 8413548, 8413123, 8414437, 8412897, 8413028, 8413341, 8412425, 8411762, 8413623, 8412346, 8411356, 8413056, 8413365, 8412372, 8414055, 8412877, 8412167, 8413264, 8414137, 8410519, 8412933, 8411846, 8412929, 8411254, 8411512, 8412777, 8412626, 8413274, 8414389, 8414117, 8412114, 8412212, 8412759, 8412696, 8412768, 8411643, 8411866, 8413966, 8410976, 8410545, 8410358, 8413979, 8414129, 8411791, 8409075, 8410314, 8411532, 8411553, 8412099, 8412085, 8410356, 8409084, 8412862, 8409823, 8412705, 8410220, 8409323, 8414090, 8410326, 8414206, 8411026, 8408298, 8407364, 8413066, 8412104, 8412235, 8412786, 8395689, 8414318, 8406384, 8414314, 8406507, 8408501, 8413630, 8414180, 8400778, 8413804, 8407298, 8413233, 8412601, 8411277, 8409940, 8414287, 8397750, 8412679, 8412727, 8413104 ]
 ```
+
+### Max Item ID
+
+The current largest item id is at https://hacker-news.firebaseio.com/v0/maxitem.
+
+Example: https://hacker-news.firebaseio.com/v0/maxitem.json?print=pretty
+
+```json
+8423374
+```
+
+### Changed Items and Profiles
+
+The item and profile changes are at https://hacker-news.firebaseio.com/v0/updates.
+
+Example: https://hacker-news.firebaseio.com/v0/updates.json?print=pretty
+
+```json
+{
+  "items" : [ 8423305, 8420805, 8423379, 8422504, 8423178, 8423336, 8422717, 8417484, 8423378, 8423238, 8423353, 8422395, 8423072, 8423044, 8423344, 8423374, 8423015, 8422428, 8423377, 8420444, 8423300, 8422633, 8422599, 8422408, 8422928, 8394339, 8421900, 8420902, 8422087 ],
+  "profiles" : [ "thefox", "mdda", "plinkplonk", "GBond", "rqebmm", "neom", "arram", "mcmancini", "metachris", "DubiousPusher", "dochtman", "kstrauser", "biren34", "foobarqux", "mkehrt", "nathanm412", "wmblaettler", "JoeAnzalone", "rcconf", "johndbritton", "msie", "cktsai", "27182818284", "kevinskii", "wildwood", "mcherm", "naiyt", "matthewmcg", "joelhaus", "tshtf", "MrZongle2", "Bogdanp" ]
+}
+```
+
+
