@@ -14,11 +14,17 @@ The API is based at https://hacker-news.firebaseio.com.
 
 We hope to improve it over time, and may later enable access to private per-user data using OAuth. The changes won't always be backward compatible, so we're going to version the API. This first iteration will live at https://hacker-news.firebaseio.com/v0/ and is structured as described below.
 
+## Design
+
+The v0 API is essentially a dump of our in-memory data structures. We know, what works great locally in memory isn't so hot over the network. Many of the awkward things are just the way HN works internally. Want to know the total number of comments on an article? Traverse the tree and count. Want to know the children of an item? Load the item and get their IDs, then load them. The newest page? Starts at item maxid and walks backward, keeping only the top level stories. Same for Ask, Show, etc.
+
+I'm not saying this to defend it - It's not the ideal public API, but it's the one we could release in the time we had. While awkward, it's possible to implement most of HN using it.
+
 ## Items
 
 Stories, comments, jobs, Ask HNs and even polls are just items. They're identified by their ids, which are unique integers, and live under https://hacker-news.firebaseio.com/v0/item/<id>.
 
-All items have a subset of the following properties:
+All items have some of the following properties:
 
 Field | Description
 ------|------------
@@ -27,20 +33,22 @@ deleted | `true` if the item is deleted.
 type | The type of item. One of "job", "story", "comment", "poll", or "pollopt".
 by | The username of the item's author.
 time | Creation date of the item, in [Unix Time](http://en.wikipedia.org/wiki/Unix_time).
-text | The comment, Ask HN, or poll text. HTML.
+text | The comment, story or poll text. HTML.
 dead | `true` if the item is dead.
 parent | The item's parent. For comments, either another comment or the relevant story. For pollopts, the relevant poll.
 kids | The ids of the item's comments, in ranked display order.
 url | The URL of the story.
 score | The story's score, or the votes for a pollopt.
-title | The title of the story or poll.
+title | The title of the story, poll or job.
 parts | A list of related pollopts, in display order.
+descendants | In the case of stories or polls, the total comment count.
 
 For example, a story: https://hacker-news.firebaseio.com/v0/item/8863.json?print=pretty
 
 ```json
 {
   "by" : "dhouston",
+  "descendants" : 71,
   "id" : 8863,
   "kids" : [ 8952, 9224, 8917, 8884, 8887, 8943, 8869, 8958, 9005, 9671, 8940, 9067, 8908, 9055, 8865, 8881, 8872, 8873, 8955, 10403, 8903, 8928, 9125, 8998, 8901, 8902, 8907, 8894, 8878, 8870, 8980, 8934, 8876 ],
   "score" : 111,
@@ -70,6 +78,7 @@ poll: https://hacker-news.firebaseio.com/v0/item/126809.json?print=pretty
 ```json
 {
   "by" : "pg",
+  "descendants" : 54,
   "id" : 126809,
   "kids" : [ 126822, 126823, 126993, 126824, 126934, 127411, 126888, 127681, 126818, 126816, 126854, 127095, 126861, 127313, 127299, 126859, 126852, 126882, 126832, 127072, 127217, 126889, 127535, 126917, 126875 ],
   "parts" : [ 126810, 126811, 126812 ],
@@ -125,24 +134,34 @@ For example: https://hacker-news.firebaseio.com/v0/user/jl.json?print=pretty
 
 The coolest part of Firebase is its support for change notifications. While you can subscribe to individual items and profiles, you'll need to use the following to observe front page ranking, new items, and new profiles.
 
-### Top Stories
-
-The current top 100 stories are at https://hacker-news.firebaseio.com/v0/topstories.
-
-Example: https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty
-
-```json
-[ 8414149, 8414078, 8413972, 8411638, 8414102, 8413204, 8413100, 8413971, 8412744, 8414003, 8412841, 8412802, 8412605, 8413548, 8413123, 8414437, 8412897, 8413028, 8413341, 8412425, 8411762, 8413623, 8412346, 8411356, 8413056, 8413365, 8412372, 8414055, 8412877, 8412167, 8413264, 8414137, 8410519, 8412933, 8411846, 8412929, 8411254, 8411512, 8412777, 8412626, 8413274, 8414389, 8414117, 8412114, 8412212, 8412759, 8412696, 8412768, 8411643, 8411866, 8413966, 8410976, 8410545, 8410358, 8413979, 8414129, 8411791, 8409075, 8410314, 8411532, 8411553, 8412099, 8412085, 8410356, 8409084, 8412862, 8409823, 8412705, 8410220, 8409323, 8414090, 8410326, 8414206, 8411026, 8408298, 8407364, 8413066, 8412104, 8412235, 8412786, 8395689, 8414318, 8406384, 8414314, 8406507, 8408501, 8413630, 8414180, 8400778, 8413804, 8407298, 8413233, 8412601, 8411277, 8409940, 8414287, 8397750, 8412679, 8412727, 8413104 ]
-```
-
 ### Max Item ID
 
-The current largest item id is at https://hacker-news.firebaseio.com/v0/maxitem.
+The current largest item id is at https://hacker-news.firebaseio.com/v0/maxitem. You can walk backward from here to discover all items.
 
 Example: https://hacker-news.firebaseio.com/v0/maxitem.json?print=pretty
 
 ```json
-8423374
+9130260
+```
+
+### New and Top Stories
+
+Up to 500 top and new stories are at https://hacker-news.firebaseio.com/v0/topstories and https://hacker-news.firebaseio.com/v0/newstories. 
+
+Example: https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty
+
+```json
+[ 9129911, 9129199, 9127761, 9128141, 9128264, 9127792, 9129248, 9127092, 9128367, ..., 9038733 ]
+```
+
+### Ask, Show and Job Stories
+
+Up to 200 of the latest Ask HN, Show HN, and Job stories are at https://hacker-news.firebaseio.com/v0/askstories, https://hacker-news.firebaseio.com/v0/showstories, and https://hacker-news.firebaseio.com/v0/jobstories.
+
+Example: https://hacker-news.firebaseio.com/v0/askstories.json?print=pretty
+
+```json
+[ 9127232, 9128437, 9130049, 9130144, 9130064, 9130028, 9129409, 9127243, 9128571, ..., 9120990 ]
 ```
 
 ### Changed Items and Profiles
@@ -157,5 +176,3 @@ Example: https://hacker-news.firebaseio.com/v0/updates.json?print=pretty
   "profiles" : [ "thefox", "mdda", "plinkplonk", "GBond", "rqebmm", "neom", "arram", "mcmancini", "metachris", "DubiousPusher", "dochtman", "kstrauser", "biren34", "foobarqux", "mkehrt", "nathanm412", "wmblaettler", "JoeAnzalone", "rcconf", "johndbritton", "msie", "cktsai", "27182818284", "kevinskii", "wildwood", "mcherm", "naiyt", "matthewmcg", "joelhaus", "tshtf", "MrZongle2", "Bogdanp" ]
 }
 ```
-
-
