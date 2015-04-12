@@ -26,14 +26,14 @@ I'm not saying this to defend it - It's not the ideal public API, but it's the o
 
 Stories, comments, jobs, Ask HNs and even polls are just items. They're identified by their ids, which are unique integers, and live under https://hacker-news.firebaseio.com/v0/item/<id>.
 
-All items have some of the following properties:
+All items have some of the following properties, with require properties in bold:
 
 Field | Description
 ------|------------
-id | The item's unique id. Required.
+**id** | The item's unique id.
 deleted | `true` if the item is deleted.
 type | The type of item. One of "job", "story", "comment", "poll", or "pollopt".
-by | The username of the item's author.
+**by** | The username of the item's author.
 time | Creation date of the item, in [Unix Time](http://en.wikipedia.org/wiki/Unix_time).
 text | The comment, story or poll text. HTML.
 dead | `true` if the item is dead.
@@ -144,10 +144,10 @@ Users are identified by case-sensitive ids, and live under https://hacker-news.f
 
 Field | Description
 ------|------------
-id | The user's unique username. Case-sensitive. Required.
+**id** | The user's unique username. Case-sensitive. Required.
 delay | Delay in minutes between a comment's creation and its visibility to other users.
-created | Creation date of the user, in [Unix Time](http://en.wikipedia.org/wiki/Unix_time).
-karma | The user's karma.
+**created** | Creation date of the user, in [Unix Time](http://en.wikipedia.org/wiki/Unix_time).
+**karma** | The user's karma.
 about | The user's optional self-description. HTML.
 submitted | List of the user's stories, polls and comments.
 
