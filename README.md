@@ -75,6 +75,20 @@ comment: https://hacker-news.firebaseio.com/v0/item/2921983.json?print=pretty
 }
 ```
 
+job: https://hacker-news.firebaseio.com/v0/item/9235551.json?print=pretty
+```json
+{
+  "by" : "nickporter",
+  "id" : 9235551,
+  "score" : 1,
+  "text" : "We change the way brick-and-mortar retailers interact with their data. We help them make better decisions and grow their business.<p>The landscape is currently dominated by legacy software from SAP, Oracle, IBM, etc. We&#x27;re showing our customers what beautifully crafted software looks like.<p>We&#x27;re looking for driven individuals to help architect and implement the next iteration of our platform. Our customers include multinational retailers from across the world, so you&#x27;ll get a chance to learn the inside operations of some of the biggest consumer-facing companies. Oh and we&#x27;re processing over 1 billion dollars worth of transactional data.<p>The ideal candidate can easily work in 2 of these areas of the stack:<p><pre><code>    - UI&#x2F;UX Design\n    - Frontend       (Angular, D3, CoffeeScript, SASS, Jade, Grunt)\n    - Backend        (Node, Python, Go, SQL)\n    - Infrastructure (Spark, Docker, CoreOS, Kubernetes, AWS)\n</code></pre>\nWe are constantly improving and evolving our stack, so it&#x27;s not a big deal if you don&#x27;t know some of the tech that&#x27;s listed. What&#x27;s important is that you have a passion for your craft and that you&#x27;re able to learn quickly. Our team is growing, so this is an awesome opportunity to be part of the core product and engineering team and lay the foundation of the platform.<p>What we offer:<p><pre><code>    - A fully stocked fridge\n    - An office in SOMA, San Francisco, 10min away from Bart or Caltrain\n    - Paid lunches\n    - Flexible vacation time\n    - Full healthcare package\n    - Generous stock option plan\n    - Whatever gear you need\n    - Visa sponsorships\n</code></pre>\nSend an email to `nick@42technologies.com` if you&#x27;re interested!",
+  "time" : 1426811086,
+  "title" : "42 (YC W14) is hiring engineers to help fix retail",
+  "type" : "job",
+  "url" : ""
+}
+```
+
 poll: https://hacker-news.firebaseio.com/v0/item/126809.json?print=pretty
 
 ```json
