@@ -14,6 +14,8 @@ The API is based at https://hacker-news.firebaseio.com.
 
 We hope to improve it over time, and may later enable access to private per-user data using OAuth. The changes won't always be backward compatible, so we're going to version the API. This first iteration will live at https://hacker-news.firebaseio.com/v0/ and is structured as described below.
 
+For versioning purposes, only removal of a non-optional field or alteration of an existing field will be considered incompatible changes. *Clients should gracefully handle additional fields they don't expect, and simply ignore them.*
+
 ## Design
 
 The v0 API is essentially a dump of our in-memory data structures. We know, what works great locally in memory isn't so hot over the network. Many of the awkward things are just the way HN works internally. Want to know the total number of comments on an article? Traverse the tree and count. Want to know the children of an item? Load the item and get their IDs, then load them. The newest page? Starts at item maxid and walks backward, keeping only the top level stories. Same for Ask, Show, etc.
