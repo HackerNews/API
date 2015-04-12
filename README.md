@@ -75,15 +75,33 @@ comment: https://hacker-news.firebaseio.com/v0/item/2921983.json?print=pretty
 }
 ```
 
-job: https://hacker-news.firebaseio.com/v0/item/9235551.json?print=pretty
+ask: https://hacker-news.firebaseio.com/v0/item/121003.json?print=pretty
+
 ```json
 {
-  "by" : "nickporter",
-  "id" : 9235551,
-  "score" : 1,
-  "text" : "We change the way brick-and-mortar retailers interact with their data. We help them make better decisions and grow their business.<p>The landscape is currently dominated by legacy software from SAP, Oracle, IBM, etc. We&#x27;re showing our customers what beautifully crafted software looks like.<p>We&#x27;re looking for driven individuals to help architect and implement the next iteration of our platform. Our customers include multinational retailers from across the world, so you&#x27;ll get a chance to learn the inside operations of some of the biggest consumer-facing companies. Oh and we&#x27;re processing over 1 billion dollars worth of transactional data.<p>The ideal candidate can easily work in 2 of these areas of the stack:<p><pre><code>    - UI&#x2F;UX Design\n    - Frontend       (Angular, D3, CoffeeScript, SASS, Jade, Grunt)\n    - Backend        (Node, Python, Go, SQL)\n    - Infrastructure (Spark, Docker, CoreOS, Kubernetes, AWS)\n</code></pre>\nWe are constantly improving and evolving our stack, so it&#x27;s not a big deal if you don&#x27;t know some of the tech that&#x27;s listed. What&#x27;s important is that you have a passion for your craft and that you&#x27;re able to learn quickly. Our team is growing, so this is an awesome opportunity to be part of the core product and engineering team and lay the foundation of the platform.<p>What we offer:<p><pre><code>    - A fully stocked fridge\n    - An office in SOMA, San Francisco, 10min away from Bart or Caltrain\n    - Paid lunches\n    - Flexible vacation time\n    - Full healthcare package\n    - Generous stock option plan\n    - Whatever gear you need\n    - Visa sponsorships\n</code></pre>\nSend an email to `nick@42technologies.com` if you&#x27;re interested!",
-  "time" : 1426811086,
-  "title" : "42 (YC W14) is hiring engineers to help fix retail",
+  "by" : "tel",
+  "descendants" : 16,
+  "id" : 121003,
+  "kids" : [ 121016, 121109, 121168 ],
+  "score" : 25,
+  "text" : "<i>or</i> HN: the Next Iteration<p>I get the impression that with Arc being released a lot of people who never had time for HN before are suddenly dropping in more often. (PG: what are the numbers on this? I'm envisioning a spike.)<p>Not to say that isn't great, but I'm wary of Diggification. Between links comparing programming to sex and a flurry of gratuitous, ostentatious  adjectives in the headlines it's a bit concerning.<p>80% of the stuff that makes the front page is still pretty awesome, but what's in place to keep the signal/noise ratio high? Does the HN model still work as the community scales? What's in store for (++ HN)?",
+  "time" : 1203647620,
+  "title" : "Ask HN: The Arc Effect",
+  "type" : "story",
+  "url" : ""
+}
+```
+
+job: https://hacker-news.firebaseio.com/v0/item/192327.json?print=pretty
+
+```json
+{
+  "by" : "justin",
+  "id" : 192327,
+  "score" : 6,
+  "text" : "Justin.tv is the biggest live video site online. We serve hundreds of thousands of video streams a day, and have supported up to 50k live concurrent viewers. Our site is growing every week, and we just added a 10 gbps line to our colo. Our unique visitors are up 900% since January.<p>There are a lot of pieces that fit together to make Justin.tv work: our video cluster, IRC server, our web app, and our monitoring and search services, to name a few. A lot of our website is dependent on Flash, and we're looking for talented Flash Engineers who know AS2 and AS3 very well who want to be leaders in the development of our Flash.<p>Responsibilities<p><pre><code>    * Contribute to product design and implementation discussions\n    * Implement projects from the idea phase to production\n    * Test and iterate code before and after production release \n</code></pre>\nQualifications<p><pre><code>    * You should know AS2, AS3, and maybe a little be of Flex.\n    * Experience building web applications.\n    * A strong desire to work on website with passionate users and ideas for how to improve it.\n    * Experience hacking video streams, python, Twisted or rails all a plus.\n</code></pre>\nWhile we're growing rapidly, Justin.tv is still a small, technology focused company, built by hackers for hackers. Seven of our ten person team are engineers or designers. We believe in rapid development, and push out new code releases every week. We're based in a beautiful office in the SOMA district of SF, one block from the caltrain station. If you want a fun job hacking on code that will touch a lot of people, JTV is for you.<p>Note: You must be physically present in SF to work for JTV. Completing the technical problem at <a href=\"http://www.justin.tv/problems/bml\" rel=\"nofollow\">http://www.justin.tv/problems/bml</a> will go a long way with us. Cheers!",
+  "time" : 1210981217,
+  "title" : "Justin.tv is looking for a Lead Flash Engineer!",
   "type" : "job",
   "url" : ""
 }
