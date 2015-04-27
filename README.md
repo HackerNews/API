@@ -33,7 +33,7 @@ Field | Description
 **id** | The item's unique id.
 deleted | `true` if the item is deleted.
 type | The type of item. One of "job", "story", "comment", "poll", or "pollopt".
-**by** | The username of the item's author.
+by | The username of the item's author.
 time | Creation date of the item, in [Unix Time](http://en.wikipedia.org/wiki/Unix_time).
 text | The comment, story or poll text. HTML.
 dead | `true` if the item is dead.
