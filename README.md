@@ -140,7 +140,7 @@ and one of its parts: https://hacker-news.firebaseio.com/v0/item/160705.json?pri
 
 ## Users
 
-Users are identified by case-sensitive ids, and live under https://hacker-news.firebaseio.com/v0/user/.
+Users are identified by case-sensitive ids, and live under https://hacker-news.firebaseio.com/v0/user/. Only users that have public activity (comments or story submissions) on the site are available through the API.
 
 Field | Description
 ------|------------
