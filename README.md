@@ -170,7 +170,7 @@ The coolest part of Firebase is its support for change notifications. While you 
 
 ### Max Item ID
 
-The current largest item id is at https://hacker-news.firebaseio.com/v0/maxitem. You can walk backward from here to discover all items.
+The current largest item id is at https://hacker-news.firebaseio.com/v0/maxitem.json. You can walk backward from here to discover all items.
 
 Example: https://hacker-news.firebaseio.com/v0/maxitem.json?print=pretty
 
@@ -180,7 +180,7 @@ Example: https://hacker-news.firebaseio.com/v0/maxitem.json?print=pretty
 
 ### New and Top Stories
 
-Up to 500 top and new stories are at https://hacker-news.firebaseio.com/v0/topstories and https://hacker-news.firebaseio.com/v0/newstories. 
+Up to 500 top and new stories are at https://hacker-news.firebaseio.com/v0/topstories.json and https://hacker-news.firebaseio.com/v0/newstories.json. 
 
 Example: https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty
 
@@ -190,7 +190,7 @@ Example: https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty
 
 ### Ask, Show and Job Stories
 
-Up to 200 of the latest Ask HN, Show HN, and Job stories are at https://hacker-news.firebaseio.com/v0/askstories, https://hacker-news.firebaseio.com/v0/showstories, and https://hacker-news.firebaseio.com/v0/jobstories.
+Up to 200 of the latest Ask HN, Show HN, and Job stories are at https://hacker-news.firebaseio.com/v0/askstories.json, https://hacker-news.firebaseio.com/v0/showstories.json, and https://hacker-news.firebaseio.com/v0/jobstories.json.
 
 Example: https://hacker-news.firebaseio.com/v0/askstories.json?print=pretty
 
@@ -200,7 +200,7 @@ Example: https://hacker-news.firebaseio.com/v0/askstories.json?print=pretty
 
 ### Changed Items and Profiles
 
-The item and profile changes are at https://hacker-news.firebaseio.com/v0/updates.
+The item and profile changes are at https://hacker-news.firebaseio.com/v0/updates.json.
 
 Example: https://hacker-news.firebaseio.com/v0/updates.json?print=pretty
 
