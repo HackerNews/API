@@ -10,7 +10,7 @@ Please email api@ycombinator.com if you find any bugs.
 
 ## URI and Versioning
 
-The API is based at https://hacker-news.firebaseio.com.
+The current API is based at https://hacker-news.firebaseio.com/v0/.
 
 We hope to improve it over time, and may later enable access to private per-user data using OAuth. The changes won't always be backward compatible, so we're going to version the API. This first iteration will live at https://hacker-news.firebaseio.com/v0/ and is structured as described below.
 
