@@ -176,9 +176,9 @@ Example: https://hacker-news.firebaseio.com/v0/maxitem.json?print=pretty
 9130260
 ```
 
-### New and Top Stories
+### New, Top and Best Stories
 
-Up to 500 top and new stories are at https://hacker-news.firebaseio.com/v0/topstories and https://hacker-news.firebaseio.com/v0/newstories. 
+Up to 500 top and new stories are at https://hacker-news.firebaseio.com/v0/topstories and https://hacker-news.firebaseio.com/v0/newstories. Best stories are at https://hacker-news.firebaseio.com/v0/beststories.
 
 Example: https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty
 
