@@ -45,7 +45,7 @@ descendants | In the case of stories or polls, the total comment count.
 
 For example, a story: https://hacker-news.firebaseio.com/v0/item/8863.json?print=pretty
 
-```json
+```javascript
 {
   "by" : "dhouston",
   "descendants" : 71,
@@ -61,7 +61,7 @@ For example, a story: https://hacker-news.firebaseio.com/v0/item/8863.json?print
 
 comment: https://hacker-news.firebaseio.com/v0/item/2921983.json?print=pretty
 
-```json
+```javascript
 {
   "by" : "norvig",
   "id" : 2921983,
@@ -75,7 +75,7 @@ comment: https://hacker-news.firebaseio.com/v0/item/2921983.json?print=pretty
 
 ask: https://hacker-news.firebaseio.com/v0/item/121003.json?print=pretty
 
-```json
+```javascript
 {
   "by" : "tel",
   "descendants" : 16,
@@ -92,7 +92,7 @@ ask: https://hacker-news.firebaseio.com/v0/item/121003.json?print=pretty
 
 job: https://hacker-news.firebaseio.com/v0/item/192327.json?print=pretty
 
-```json
+```javascript
 {
   "by" : "justin",
   "id" : 192327,
@@ -107,7 +107,7 @@ job: https://hacker-news.firebaseio.com/v0/item/192327.json?print=pretty
 
 poll: https://hacker-news.firebaseio.com/v0/item/126809.json?print=pretty
 
-```json
+```javascript
 {
   "by" : "pg",
   "descendants" : 54,
@@ -124,7 +124,7 @@ poll: https://hacker-news.firebaseio.com/v0/item/126809.json?print=pretty
 
 and one of its parts: https://hacker-news.firebaseio.com/v0/item/160705.json?print=pretty
 
-```json
+```javascript
 {
   "by" : "pg",
   "id" : 160705,
@@ -151,7 +151,7 @@ submitted | List of the user's stories, polls and comments.
 
 For example: https://hacker-news.firebaseio.com/v0/user/jl.json?print=pretty
 
-```json
+```javascript
 {
   "about" : "This is a test",
   "created" : 1173923446,
@@ -172,7 +172,7 @@ The current largest item id is at https://hacker-news.firebaseio.com/v0/maxitem.
 
 Example: https://hacker-news.firebaseio.com/v0/maxitem.json?print=pretty
 
-```json
+```javascript
 9130260
 ```
 
@@ -182,7 +182,7 @@ Up to 500 top and new stories are at https://hacker-news.firebaseio.com/v0/topst
 
 Example: https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty
 
-```json
+```javascript
 [ 9129911, 9129199, 9127761, 9128141, 9128264, 9127792, 9129248, 9127092, 9128367, ..., 9038733 ]
 ```
 
@@ -192,7 +192,7 @@ Up to 200 of the latest Ask HN, Show HN, and Job stories are at https://hacker-n
 
 Example: https://hacker-news.firebaseio.com/v0/askstories.json?print=pretty
 
-```json
+```javascript
 [ 9127232, 9128437, 9130049, 9130144, 9130064, 9130028, 9129409, 9127243, 9128571, ..., 9120990 ]
 ```
 
@@ -202,7 +202,7 @@ The item and profile changes are at https://hacker-news.firebaseio.com/v0/update
 
 Example: https://hacker-news.firebaseio.com/v0/updates.json?print=pretty
 
-```json
+```javascript
 {
   "items" : [ 8423305, 8420805, 8423379, 8422504, 8423178, 8423336, 8422717, 8417484, 8423378, 8423238, 8423353, 8422395, 8423072, 8423044, 8423344, 8423374, 8423015, 8422428, 8423377, 8420444, 8423300, 8422633, 8422599, 8422408, 8422928, 8394339, 8421900, 8420902, 8422087 ],
   "profiles" : [ "thefox", "mdda", "plinkplonk", "GBond", "rqebmm", "neom", "arram", "mcmancini", "metachris", "DubiousPusher", "dochtman", "kstrauser", "biren34", "foobarqux", "mkehrt", "nathanm412", "wmblaettler", "JoeAnzalone", "rcconf", "johndbritton", "msie", "cktsai", "27182818284", "kevinskii", "wildwood", "mcherm", "naiyt", "matthewmcg", "joelhaus", "tshtf", "MrZongle2", "Bogdanp" ]
