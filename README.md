@@ -35,7 +35,8 @@ by | The username of the item's author.
 time | Creation date of the item, in [Unix Time](http://en.wikipedia.org/wiki/Unix_time).
 text | The comment, story or poll text. HTML.
 dead | `true` if the item is dead.
-parent | The item's parent. For comments, either another comment or the relevant story. For pollopts, the relevant poll.
+parent | The comment's parent: either another comment or the relevant story.
+poll | The pollopt's associated poll.
 kids | The ids of the item's comments, in ranked display order.
 url | The URL of the story.
 score | The story's score, or the votes for a pollopt.
@@ -128,7 +129,7 @@ and one of its parts: https://hacker-news.firebaseio.com/v0/item/160705.json?pri
 {
   "by" : "pg",
   "id" : 160705,
-  "parent" : 160704,
+  "poll" : 160704,
   "score" : 335,
   "text" : "Yes, ban them; I'm tired of seeing Valleywag stories on News.YC.",
   "time" : 1207886576,
