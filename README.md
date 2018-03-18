@@ -209,3 +209,9 @@ Example: https://hacker-news.firebaseio.com/v0/updates.json?print=pretty
   "profiles" : [ "thefox", "mdda", "plinkplonk", "GBond", "rqebmm", "neom", "arram", "mcmancini", "metachris", "DubiousPusher", "dochtman", "kstrauser", "biren34", "foobarqux", "mkehrt", "nathanm412", "wmblaettler", "JoeAnzalone", "rcconf", "johndbritton", "msie", "cktsai", "27182818284", "kevinskii", "wildwood", "mcherm", "naiyt", "matthewmcg", "joelhaus", "tshtf", "MrZongle2", "Bogdanp" ]
 }
 ```
+
+## Open Source Implementations (Unofficial)
+* [HackerNews.jl](https://github.com/rahulkp220/HackerNews.jl) - Julia 
+* [haxor](https://github.com/avinassh/haxor) - Python
+* [ruby-hackernews](https://github.com/bolthar/ruby-hackernews) - Ruby
+* [gophernews](https://github.com/caser/gophernews) - Go
