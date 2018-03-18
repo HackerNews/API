@@ -210,7 +210,7 @@ Example: https://hacker-news.firebaseio.com/v0/updates.json?print=pretty
 }
 ```
 
-### Open source Implementations in different programming languages (Unofficial)
+## Open Source Implementations (Unofficial)
 * [HackerNews.jl](https://github.com/rahulkp220/HackerNews.jl) - Julia 
 * [haxor](https://github.com/avinassh/haxor) - Python
 * [ruby-hackernews](https://github.com/bolthar/ruby-hackernews) - Ruby
