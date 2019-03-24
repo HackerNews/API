@@ -199,7 +199,7 @@ Example: https://hacker-news.firebaseio.com/v0/askstories.json?print=pretty
 
 ### Changed Items and Profiles
 
-The item and profile changes are at `/v0/updates`.
+The item and profile changes are at `/v0/updates`. Item changes are title and url changes. Profiles changes are about changes.
 
 Example: https://hacker-news.firebaseio.com/v0/updates.json?print=pretty
 
