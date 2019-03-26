@@ -147,7 +147,7 @@ Field | Description
 delay | Delay in minutes between a comment's creation and its visibility to other users.
 **created** | Creation date of the user, in [Unix Time](http://en.wikipedia.org/wiki/Unix_time).
 **karma** | The user's karma.
-about | The user's optional self-description. HTML.
+about | The user's optional self-description. HTML. ("This is a test" is returned if the "about" section is empty)
 submitted | List of the user's stories, polls and comments.
 
 For example: https://hacker-news.firebaseio.com/v0/user/jl.json?print=pretty
