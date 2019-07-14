@@ -179,13 +179,7 @@ Example: https://hacker-news.firebaseio.com/v0/maxitem.json?print=pretty
 
 ### New, Top and Best Stories
 
-Up to 500 top and new stories are at `/v0/topstories` and `/v0/newstories`. Best stories are at `/v0/beststories`.
-
-|         | `topstories` | `newstories` | `beststories` |
-|---------|--------------|--------------|---------------|
-| `story` | ✔            | ✔            | ✔             |
-| `job`   | ✔            |              |               |
-
+Up to 500 top and new stories are at `/v0/topstories` (also contains jobs) and `/v0/newstories`. Best stories are at `/v0/beststories`.
 
 Example: https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty
 
