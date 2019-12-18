@@ -40,7 +40,7 @@ poll | The pollopt's associated poll.
 kids | The ids of the item's comments, in ranked display order.
 url | The URL of the story.
 score | The story's score, or the votes for a pollopt.
-title | The title of the story, poll or job.
+title | The title of the story, poll or job. HTML.
 parts | A list of related pollopts, in display order.
 descendants | In the case of stories or polls, the total comment count.
 
