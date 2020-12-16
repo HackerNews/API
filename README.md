@@ -143,7 +143,6 @@ Users are identified by case-sensitive ids, and live under `/v0/user/`. Only use
 Field | Description
 ------|------------
 **id** | The user's unique username. Case-sensitive. Required.
-delay | Delay in minutes between a comment's creation and its visibility to other users.
 **created** | Creation date of the user, in [Unix Time](http://en.wikipedia.org/wiki/Unix_time).
 **karma** | The user's karma.
 about | The user's optional self-description. HTML.
