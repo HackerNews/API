@@ -1,0 +1,31 @@
+<html>
+<head>
+
+<body>
+    <header>
+    
+        <div class="row">
+            <div class="logo">
+            <img src="logo.jfif">
+                 </div>
+        <ul class="main-nav">
+            <li class="active"><a href=""> HOME </a></li>
+            <li><a href=""> SERVICES </a></li>
+            <li><a href=""> ABOUT </a></li>
+            <li><a href=""> CONTACT </a></li>
+            <li><a href=""> FAQ </a></li>
+            <li><a href=""> NEWS </a></li>
+            
+            </ul>
+        
+        </div>
+    
+    
+    
+    </header>
+    
+        
+    
+</body>  
+    
+</html>
