@@ -1,12 +1,15 @@
 # Hacker News API
 
 ## Overview
+<!--Contents of this overview section should really just speak to the overall objective of this API. What does the HN API allow users to do? My recommendation is that the following information be placed elsewhere, in a more appropriate file. For API, let's just stick to how to actually use the API.-->
+<!--If the info in this section needs to remain in the API doc and is pertinent to the user's success, I suggest we reword this section as actionable steps for the reader--> 
 
-In partnership with [Firebase](https://firebase.google.com/), we're making the public Hacker News data available in near real time. Firebase enables easy access from [Android](https://firebase.google.com/docs/android/setup), [iOS](https://firebase.google.com/docs/ios/setup) and the [web](https://firebase.google.com/docs/web/setup). [Servers](https://firebase.google.com/docs/server/setup) aren't left out.
+In partnership with [Firebase](https://firebase.google.com/), we're making the public Hacker News data available in near real time. Firebase enables easy access <!-- easy access to what? The HN data/application?--> from [Android](https://firebase.google.com/docs/android/setup), [iOS](https://firebase.google.com/docs/ios/setup) and the [web](https://firebase.google.com/docs/web/setup). [Servers](https://firebase.google.com/docs/server/setup) are also accessible.
 
 If you can use one of the many [Firebase client libraries](https://firebase.google.com/docs/libraries/), you really should. The libraries handle networking efficiently and can raise events when things change. Be sure to check them out.
 
-Please email api@ycombinator.com if you find any bugs.
+Please email api@ycombinator.com if you find any bugs. 
+<!--Per my previous comments above, maybe it would be better to include most of this 'Overview' information>
 
 ## URI and Versioning
 
@@ -46,8 +49,10 @@ descendants | In the case of stories or polls, the total comment count.
 
 For example, a story: https://hacker-news.firebaseio.com/v0/item/8863.json?print=pretty
 
-```javascript
-{
+<!-- Would we consider the following a sample call request to the server? Please confirm-->
+
+```javascript 
+{ 
   "by" : "dhouston",
   "descendants" : 71,
   "id" : 8863,
@@ -135,6 +140,8 @@ and one of its parts: https://hacker-news.firebaseio.com/v0/item/160705.json?pri
   "type" : "pollopt"
 }
 ```
+
+<!--Are each of the level two and level three headers essentially different features/components of the API? In other words, what you can do with the HN API?-->
 
 ## Users
 
