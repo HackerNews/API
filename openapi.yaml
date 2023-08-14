@@ -1,0 +1,424 @@
+openapi: 3.1.0
+servers:
+  - url: "https://hacker-news.firebaseio.com/v0"
+
+info:
+  title: Hacker News API
+  version: v0
+  description: |
+    In partnership with Firebase, Hacker News makes the public Hacker News data
+    available in near real time.
+    Firebase enables easy access from Android, iOS and the web. Servers aren't left out.
+
+    The v0 API is essentially a dump of our in-memory data structures.
+    "We know, what works great locally in memory isn't so hot over the network.
+    Many of the awkward things are just the way HN works internally...
+    It's not the ideal public API, but it's the one we could release in the time we had"
+
+    Want to know the total number of comments on an article?
+    Traverse the tree and count. Want to know the children of an item?
+    Load the item and get their IDs, then load them.
+    The newest page? Starts at item maxid and walks backward, keeping only the top level stories.
+    Same for Ask, Show, etc.
+  contact:
+    name: Y Combinator API Team
+    email: "api@ycombinator.com"  
+  license:
+    name: MIT
+    url: https://github.com/HackerNews/API/blob/master/LICENSE
+
+externalDocs:
+  url: https://github.com/HackerNews/API
+  description: GitHub Repository
+
+paths:
+  "/item/{id}.json":
+    get:
+      summary: Get Hacker News Item 
+      operationId: get-item
+      description: |
+        Stories, comments, jobs, Ask HNs and even polls are just items.
+        They're identified by their ids, which are unique integers,
+        and live under /v0/item/<id>.
+      externalDocs:
+        url: https://github.com/HackerNews/API#items
+        description: GitHub Documentation
+      security: 
+        - {}
+      parameters:
+        - name: id
+          description: The item's unique ID
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: print
+          description: JSON output mode, e.g. pretty
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "404":
+          description: Item not found
+        "200":
+          description: Response
+          content:
+            application/json:
+              schema:
+                description: "Item response"
+                properties:
+                  id:
+                    summary: "The item's unique id"
+                    type: integer
+                  type:
+                    summary: |
+                      The type of item. One of "job", "story", "comment", "poll", or "pollopt"
+                    type: string
+                  deleted:
+                    summary: "true if the item is deleted"
+                    type: boolean
+                  by:
+                    summary: "The username of the item's author"
+                    type: string
+                  time:
+                    summary: "Creation date of the item, in Unix Time"
+                    type: integer
+                  text:
+                    summary: "The comment, story or poll text. HTML"
+                    type: string
+                  dead:
+                    summary: "true if the item is dead"
+                    type: boolean
+                  parent:
+                    summary: "The comment's parent: either another comment or the relevant story"
+                    type: integer
+                  poll:
+                    summary: "The pollopt's associated poll"
+                    type: integer
+                  kids:
+                    summary: "The IDs of the item's comments, in ranked display order"
+                    type: array
+                  url:
+                    summary: "The URL of the story"
+                    type: string
+                  score:
+                    summary: "The story's score, or the votes for a pollopt"
+                    type: integer
+                  title:
+                    summary: "The title of the story, poll or job. HTML"
+                    type: string
+                  parts:
+                    summary: "A list of related pollopts, in display order"
+                    type: array
+                  descendants:
+                    summary: "In the case of stories or polls, the total comment count."
+                    type: array
+              examples:
+                story:
+                  description: |
+                    See https://hacker-news.firebaseio.com/v0/item/8863.json?print=pretty
+                  value: |
+                    {
+                      "by" : "dhouston",
+                      "descendants" : 71,
+                      "id" : 8863,
+                      "kids" : [ 8952, 9224, 8917, 8884, 8887, 8943, 8869, 8958, 9005, 9671, 8940, 9067, 8908, 9055, 8865, 8881, 8872, 8873, 8955, 10403, 8903, 8928, 9125, 8998, 8901, 8902, 8907, 8894, 8878, 8870, 8980, 8934, 8876 ],
+                      "score" : 111,
+                      "time" : 1175714200,
+                      "title" : "My YC app: Dropbox - Throw away your USB drive",
+                      "type" : "story",
+                      "url" : "http://www.getdropbox.com/u/2/screencast.html"
+                    }
+                comment:
+                  description: |
+                    See https://hacker-news.firebaseio.com/v0/item/2921983.json?print=pretty 
+                  value:
+                    {
+                      "by" : "norvig",
+                      "id" : 2921983,
+                      "kids" : [ 2922097, 2922429, 2924562, 2922709, 2922573, 2922140, 2922141 ],
+                      "parent" : 2921506,
+                      "text" : "Aw shucks, guys ... you make me blush with your compliments.<p>Tell you what, Ill make a deal: I'll keep writing if you keep reading. K?",
+                      "time" : 1314211127,
+                      "type" : "comment"
+                    }
+                ask:
+                  description: 
+                    See https://hacker-news.firebaseio.com/v0/item/121003.json?print=pretty
+                  value: |
+                    {
+                      "by" : "tel",
+                      "descendants" : 16,
+                      "id" : 121003,
+                      "kids" : [ 121016, 121109, 121168 ],
+                      "score" : 25,
+                      "text" : "<i>or</i> HN: the Next Iteration<p>I get the impression that with Arc being released a lot of people who never had time for HN before are suddenly dropping in more often. (PG: what are the numbers on this? I'm envisioning a spike.)<p>Not to say that isn't great, but I'm wary of Diggification. Between links comparing programming to sex and a flurry of gratuitous, ostentatious  adjectives in the headlines it's a bit concerning.<p>80% of the stuff that makes the front page is still pretty awesome, but what's in place to keep the signal/noise ratio high? Does the HN model still work as the community scales? What's in store for (++ HN)?",
+                      "time" : 1203647620,
+                      "title" : "Ask HN: The Arc Effect",
+                      "type" : "story"
+                    }  
+                job:
+                  description: |
+                    See https://hacker-news.firebaseio.com/v0/item/192327.json?print=pretty
+                  value: |
+                    {
+                      "by" : "justin",
+                      "id" : 192327,
+                      "score" : 6,
+                      "text" : "Justin.tv is the biggest live video site online. We serve hundreds of thousands of video streams a day, and have supported up to 50k live concurrent viewers. Our site is growing every week, and we just added a 10 gbps line to our colo. Our unique visitors are up 900% since January.<p>There are a lot of pieces that fit together to make Justin.tv work: our video cluster, IRC server, our web app, and our monitoring and search services, to name a few. A lot of our website is dependent on Flash, and we're looking for talented Flash Engineers who know AS2 and AS3 very well who want to be leaders in the development of our Flash.<p>Responsibilities<p><pre><code>    * Contribute to product design and implementation discussions\n    * Implement projects from the idea phase to production\n    * Test and iterate code before and after production release \n</code></pre>\nQualifications<p><pre><code>    * You should know AS2, AS3, and maybe a little be of Flex.\n    * Experience building web applications.\n    * A strong desire to work on website with passionate users and ideas for how to improve it.\n    * Experience hacking video streams, python, Twisted or rails all a plus.\n</code></pre>\nWhile we're growing rapidly, Justin.tv is still a small, technology focused company, built by hackers for hackers. Seven of our ten person team are engineers or designers. We believe in rapid development, and push out new code releases every week. We're based in a beautiful office in the SOMA district of SF, one block from the caltrain station. If you want a fun job hacking on code that will touch a lot of people, JTV is for you.<p>Note: You must be physically present in SF to work for JTV. Completing the technical problem at <a href=\"http://www.justin.tv/problems/bml\" rel=\"nofollow\">http://www.justin.tv/problems/bml</a> will go a long way with us. Cheers!",
+                      "time" : 1210981217,
+                      "title" : "Justin.tv is looking for a Lead Flash Engineer!",
+                      "type" : "job",
+                      "url" : ""
+                    }
+                poll:
+                  description: | 
+                    See https://hacker-news.firebaseio.com/v0/item/126809.json?print=pretty
+                  value: |
+                    {
+                      "by" : "pg",
+                      "descendants" : 54,
+                      "id" : 126809,
+                      "kids" : [ 126822, 126823, 126993, 126824, 126934, 127411, 126888, 127681, 126818, 126816, 126854, 127095, 126861, 127313, 127299, 126859, 126852, 126882, 126832, 127072, 127217, 126889, 127535, 126917, 126875 ],
+                      "parts" : [ 126810, 126811, 126812 ],
+                      "score" : 46,
+                      "text" : "",
+                      "time" : 1204403652,
+                      "title" : "Poll: What would happen if News.YC had explicit support for polls?",
+                      "type" : "poll"
+                    }
+                pollopt:
+                  description: |
+                    See https://hacker-news.firebaseio.com/v0/item/160705.json?print=pretty
+                  value: |
+                    {
+                      "by" : "pg",
+                      "id" : 160705,
+                      "poll" : 160704,
+                      "score" : 335,
+                      "text" : "Yes, ban them; I'm tired of seeing Valleywag stories on News.YC.",
+                      "time" : 1207886576,
+                      "type" : "pollopt"
+                    }
+
+  /user/{id}.json:
+    get: 
+      summary: Get User Info
+      operationId: get-user-id
+      description: |
+        Users are identified by case-sensitive ids, and live under /v0/user/.
+        Only users that have public activity (comments or story submissions) on the site are available through the API.
+        externalDocs:
+          url: https://github.com/HackerNews/API#items
+          description: GitHub Documentation
+      security: 
+        - {}
+      parameters:
+        - name: id
+          description: User's unique ID
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: print
+          description: JSON output mode, e.g. pretty
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "404":
+          description: Item not found
+          content:
+            application/json:
+              examples:
+                empty-value:
+                  value: "null" 
+        "200":
+          description: User metadata
+          content:
+            application/json:
+              schema:
+                description: "Item response"
+                properties:
+                  id:
+                    summary: "User's  unique id"
+                    type: string
+                  created:
+                    description: Creation date of the user, in Unix Time
+                    type: integer
+                  karma:
+                    description: The user's karma
+                    type: integer
+                  about:
+                    description: The user's optional self-description. HTML
+                    type: string
+                  submitted:
+                    description: List of the user's stories, polls and comments
+                    type: array
+              examples: 
+                common-user:
+                  description: User example
+                  value: |
+                    {
+                      "about" : "WireMock is a free and open source tool for building and testing mock APIs. Originated in Java, now it&#x27;s being used everywhere thanks to many implementations and adapters. Join us on GitHub and Slack!",
+                      "created" : 1680600921,
+                      "id" : "wiremock",
+                      "karma" : 2,
+                      "submitted" : [ 36998400, 36998399, 36149301, 36149300, 36148010, 36136096, 36136095 ]
+                    }
+  
+  /maxitem:
+    get: 
+      summary: Get Max Item ID
+      operationId: max-item-id
+      description: |
+        The current largest item id is at /v0/maxitem. You can walk backward from here to discover all items.
+
+        Example: https://hacker-news.firebaseio.com/v0/maxitem.json?print=pretty
+      security:
+        - {}
+      parameters:
+        - name: print
+          description: JSON output mode, e.g. pretty
+          in: query
+          required: false
+          schema:
+            type: string
+      responses: 
+        "200": 
+          description: Maximum ID in the database
+          content:
+            application/json:
+              schema: 
+                format: integer
+              examples:
+                default:
+                  description: Maximum id
+                  value: "9130260"
+    
+  /topstories.json:
+    get: 
+      summary: Get up to 500 top stories
+      operationId: get-top-stories
+      description: |
+        Example: https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty
+      security:
+        - {}
+      parameters:
+        - name: print
+          description: JSON output mode, e.g. pretty
+          in: query
+          required: false
+          schema:
+            type: string
+      responses: 
+        default: 
+          description: List of story IDs
+          content:
+            application/json:
+              schema: 
+                format: array
+              examples: 
+                short-list:
+                  value: |
+                    [ 9127232, 9128437, 9130049, 9130144, 9130064, 9130028, 9129409, 9127243, 9128571, 9120990 ]
+            
+  /showstories.json:
+    get: 
+      summary: Get up to 500 new stories
+      operationId: get-new-stories
+      description: |
+        Example: https://hacker-news.firebaseio.com/v0/showstories.json?print=pretty
+      security:
+        - {}
+      parameters:
+        - name: print
+          description: JSON output mode, e.g. pretty
+          in: query
+          required: false
+          schema:
+            type: string
+      responses: 
+        default: 
+          description: List of story IDs
+          content:
+            application/json:
+              schema: 
+                format: array
+              examples: 
+                short-list:
+                  value: |
+                    [ 37114141, 37083309, 37114584, 37113442, 37111809, 37086753, 37103645, 37095542, 37108298, 37091122, 37109124, 37109065, 37109061, 37110942, 37075730, 37108364, 37107691, 37090024, 37084082, 37064152, 37050532, 37081936, 37079053, 37068695, 37064044, 37087663, 37090836, 37088521, 37101381, 37052979, 37062007, 37051358, 37054374, 37104193, 37098394, 37100760, 37072954, 37095008, 37094224, 37093410, 37089985, 37091531, 37061263, 37059707, 37088490, 37067800, 37087333, 37048088, 37073678, 37100036, 37085462, 37068332, 37068583, 37083332, 37067338, 37082316, 37052607, 37052388, 37079152, 37079003, 37078728, 37046692, 37078027, 37077990, 37060151, 37076788, 37074544 ]
+
+  /beststories.json:
+    get: 
+      summary: Get up to 500 best stories
+      operationId: get-best-stories
+      description: |
+        Example: https://hacker-news.firebaseio.com/v0/beststories.json?print=pretty
+      security:
+        - {}
+      parameters:
+        - name: print
+          description: JSON output mode, e.g. pretty
+          in: query
+          required: false
+          schema:
+            type: string
+      responses: 
+        default: 
+          description: List of story IDs
+          content:
+            application/json:
+              schema: 
+                format: array
+              examples: 
+                short-list:
+                  value: |
+                    [ 37052586, 37062422, 37078719, 37066680, 37052508, 37047053, 37084677, 37062650, 37068464, 37054241, 37050035, 37074452, 37093854, 37091983, 37073885, 37049016, 37058674, 37081306, 37081789, 37060654, 37092861, 37082771, 37112741, 37098483, 37100226, 37059479, 37092212, 37112615, 37101588, 37052622, 37063151, 37083309, 37076210, 37076523, 37079534, 37089545, 37059857, 37059481, 37110628, 37055479, 37048637, 37095302, 37100140, 37089739, 37049198, 37047746, 37063238, 37066522, 37086455, 37072530, 37086796, 37050466, 37098875, 37060470, 37060226, 37102271, 37087459, 37070398, 37063829, 37050409, 37090632, 37104742, 37060974, 37048722, 37073701, 37091989, 37111855, 37113307, 37090754, 37086308, 37075730, 37096015, 37064822, 37111317, 37103802, 37048938, 37084575, 37059487, 37101515, 37094111, 37102442, 37093163, 37085138, 37076933, 37054361, 37063459, 37081833, 37105524, 37087136, 37093632, 37076968, 37066292, 37050257, 37088548, 37107817, 37050089, 37113336, 37060269, 37115286, 37105653, 37108745, 37106789, 37049064, 37059533, 37050532, 37107298, 37105610, 37114141, 37112625, 37096178, 37055280, 37110444, 37072588, 37099750, 37054670, 37047304, 37087303, 37065288, 37057332, 37078047, 37094599, 37105764, 37074177, 37084214, 37098591, 37113330, 37111256, 37109422, 37082941, 37057866, 37048825, 37096149, 37061020, 37055368, 37082117, 37086753, 37081485, 37064152, 37062755, 37049029, 37099086, 37097353, 37050960, 37096626, 37059400, 37053250, 37052875, 37110761, 37063184, 37102610, 37091253, 37089363, 37063884, 37073938, 37084262, 37052710, 37070218, 37100503, 37055514, 37082289, 37078423, 37073768, 37104264, 37086301, 37099761, 37089817, 37064922, 37112604, 37097992, 37067894, 37054374, 37104817, 37081129, 37072851, 37061842, 37108111, 37110405, 37086779, 37058171, 37074095, 37058278, 37105477, 37076125, 37106550, 37090063, 37088591, 37088087, 37073494, 37068230, 37113314, 37086176, 37115626, 37111947, 37080404, 37097004, 37067491, 37048409, 37085449, 37055210, 37047343 ]
+
+  /updates.json:
+    get:
+      summary: Get Changed Items and Profiles
+      operationId: get-changed-items
+      description: |
+        Stories, comments, jobs, Ask HNs and even polls are just items.
+        They're identified by their ids, which are unique integers,
+        and live under /v0/item/<id>.
+      externalDocs:
+        url: https://github.com/HackerNews/API#items
+        description: GitHub Documentation
+      security: 
+        - {}
+      parameters:
+        - name: print
+          description: JSON output mode, e.g. pretty
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Response
+          content:
+            application/json:
+              schema:
+                description: "Item response"
+                properties:
+                  items:
+                    description: Changed items
+                    format: array
+                  profiles:
+                    description: Changed profiles
+                    format: array
+              examples:
+                story:
+                  description: |
+                    See https://hacker-news.firebaseio.com/v0/updates.json?print=pretty
+                  value: |
+                    {
+                      "items" : [ 8423305, 8420805, 8423379, 8422504, 8423178, 8423336, 8422717, 8417484, 8423378, 8423238, 8423353, 8422395, 8423072, 8423044, 8423344, 8423374, 8423015, 8422428, 8423377, 8420444, 8423300, 8422633, 8422599, 8422408, 8422928, 8394339, 8421900, 8420902, 8422087 ],
+                      "profiles" : [ "thefox", "mdda", "plinkplonk", "GBond", "rqebmm", "neom", "arram", "mcmancini", "metachris", "DubiousPusher", "dochtman", "kstrauser", "biren34", "foobarqux", "mkehrt", "nathanm412", "wmblaettler", "JoeAnzalone", "rcconf", "johndbritton", "msie", "cktsai", "27182818284", "kevinskii", "wildwood", "mcherm", "naiyt", "matthewmcg", "joelhaus", "tshtf", "MrZongle2", "Bogdanp" ]
+                    }
