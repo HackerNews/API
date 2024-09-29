@@ -22,7 +22,7 @@ I'm not saying this to defend it - It's not the ideal public API, but it's the o
 
 ## Items
 
-Stories, comments, jobs, Ask HNs and even polls are just items. They're identified by their ids, which are unique integers, and live under `/v0/item/<id>`.
+Stories, comments, jobs, Ask HNs and even polls are just items. They're identified by their ids, which are unique integers, and live under `/v0/item/<id>.json`.
 
 All items have some of the following properties, with required properties in bold:
 
